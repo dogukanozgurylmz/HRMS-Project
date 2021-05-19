@@ -28,11 +28,5 @@ public class EmployerUser {
 	
 	@Column(name="web_address")
 	private String webAddress;
-	
-	@Column(name="phone_number")
-	private String phoneNumber;
-	
-	@Column(name="is_activated")
-	private boolean isActivated;
 
 }
