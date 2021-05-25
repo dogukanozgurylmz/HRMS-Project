@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.hrms.business.abstracts.JobTitleService;
+import com.example.hrms.business.abstracts.CandidateUserService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
-import com.example.hrms.entities.concretes.JobTitle;
+import com.example.hrms.entities.concretes.CandidateUser;
 
 @RestController
-@RequestMapping("/api/jobtitles")
-public class JobTitlesController {
-	
-	private JobTitleService jobTitleService;
+@RequestMapping("/api/candidates")
+public class CandidateUsersController {
+
+	CandidateUserService candidateUserService;
 
 	@Autowired
-	public JobTitlesController(JobTitleService jobTitleService) {
+	public CandidateUsersController(CandidateUserService candidateUserService) {
 		super();
-		this.jobTitleService = jobTitleService;
+		this.candidateUserService = candidateUserService;
 	}
-
+	
 	@GetMapping("/getall")
-	public DataResult<List<JobTitle>> getAll() {
-		return jobTitleService.getAll();
+	public DataResult<List<CandidateUser>> getAll(){
+		return candidateUserService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobTitle jobTitle) {
-		return jobTitleService.add(jobTitle);
+	public Result add(@RequestBody CandidateUser candidateUser) {
+		return candidateUserService.add(candidateUser);
 	}
 	
 }

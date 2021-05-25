@@ -5,18 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="users")
-public class User {
+public abstract class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +29,16 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	public User() {
+		
+	}
+
+	public User(int id, String emailAddress, String password) {
+		super();
+		this.id = id;
+		this.emailAddress = emailAddress;
+		this.password = password;
+	}
 
 }
