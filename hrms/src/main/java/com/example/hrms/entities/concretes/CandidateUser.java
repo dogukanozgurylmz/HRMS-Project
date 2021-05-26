@@ -36,9 +36,9 @@ public class CandidateUser extends User {
 
 	}
 
-	public CandidateUser(int id, String emailAddress, String password, String firstName, String lastName,
+	public CandidateUser(int id, String emailAddress, String password, String passwordRepeat, String firstName, String lastName,
 			String nationalityIdentity, String birthOfDate) {
-		super(id, emailAddress, password);
+		super(id, emailAddress, password, passwordRepeat);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nationalityIdentity = nationalityIdentity;

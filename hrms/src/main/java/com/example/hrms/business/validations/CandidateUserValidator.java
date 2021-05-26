@@ -15,7 +15,9 @@ public class CandidateUserValidator implements ValidationService<CandidateUser> 
 				|| candidateUser.getNationalityIdentity().isBlank()
 				|| candidateUser.getBirthOfDate().isBlank()
 				|| candidateUser.getEmailAddress().isBlank()
-				|| candidateUser.getPassword().isBlank();
+				|| candidateUser.getPassword().isBlank()
+				|| candidateUser.getPasswordRepeat().isBlank();
+		
 		if (result) {
 			return false;
 		}

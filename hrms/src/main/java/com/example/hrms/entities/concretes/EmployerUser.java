@@ -31,8 +31,8 @@ public class EmployerUser extends User {
 
 	}
 
-	public EmployerUser(int id, String emailAddress, String password, String companyName, String webAddress) {
-		super(id, emailAddress, password);
+	public EmployerUser(int id, String emailAddress, String password, String passwordRepeat, String companyName, String webAddress) {
+		super(id, emailAddress, password, passwordRepeat);
 		this.companyName = companyName;
 		this.webAddress = webAddress;
 	}

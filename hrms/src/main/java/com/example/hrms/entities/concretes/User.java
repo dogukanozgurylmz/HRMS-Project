@@ -30,15 +30,18 @@ public abstract class User {
 	@Column(name="password")
 	private String password;
 	
+	private String passwordRepeat;
+	
 	public User() {
 		
 	}
 
-	public User(int id, String emailAddress, String password) {
+	public User(int id, String emailAddress, String password, String passwordRepeat) {
 		super();
 		this.id = id;
 		this.emailAddress = emailAddress;
 		this.password = password;
+		this.passwordRepeat = passwordRepeat;
 	}
 
 }

@@ -31,8 +31,8 @@ public class EmployeeUser extends User {
 
 	}
 
-	public EmployeeUser(int id, String emailAddress, String password, String firstName, String lastName) {
-		super(id, emailAddress, password);
+	public EmployeeUser(int id, String emailAddress, String password, String passwordRepeat, String firstName, String lastName) {
+		super(id, emailAddress, password, passwordRepeat);
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
