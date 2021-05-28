@@ -5,34 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="users")
-public abstract class User {
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "verification_codes")
+public class VerificationCode {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="email")
-	private String emailAddress;
-	
-	@Column(name="password")
-	private String password;
-	
-	@Column(name = "is_mail_verify")
-	private boolean isMailVerify;
+	@Column(name="user_id")
+	private int userId;
 
+	@Column(name = "code")
+	private String code;
+	
+	@Column(name = "is_verified")
+	private boolean isVerified;
+	
 }

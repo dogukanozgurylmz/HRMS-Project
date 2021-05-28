@@ -2,22 +2,19 @@ package com.example.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ForeignKey;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "candidate_users")
+@Table(name = "candidates")
 public class CandidateUser extends User {
 	
 	@Column(name = "first_name")
@@ -32,13 +29,9 @@ public class CandidateUser extends User {
 	@Column(name = "birth_date")
 	private String birthOfDate;
 
-	public CandidateUser() {
-
-	}
-
-	public CandidateUser(int id, String emailAddress, String password, String passwordRepeat, String firstName, String lastName,
+	public CandidateUser(int id, String emailAddress, String password, boolean isMailVerify, String firstName, String lastName,
 			String nationalityIdentity, String birthOfDate) {
-		super(id, emailAddress, password, passwordRepeat);
+		super(id, emailAddress, password, isMailVerify);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nationalityIdentity = nationalityIdentity;

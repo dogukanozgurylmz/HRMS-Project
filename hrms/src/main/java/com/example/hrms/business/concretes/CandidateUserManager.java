@@ -8,28 +8,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.CandidateUserService;
+import com.example.hrms.business.abstracts.UserCheckService;
 import com.example.hrms.business.abstracts.ValidationService;
-import com.example.hrms.core.adapters.FakeMernisService;
+import com.example.hrms.business.abstracts.VerificationCodeService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.CandidateUserDao;
+import com.example.hrms.dataAccess.abstracts.UserDao;
 import com.example.hrms.entities.concretes.CandidateUser;
+import com.example.hrms.entities.concretes.User;
 
 @Service
 public class CandidateUserManager implements CandidateUserService {
 	
 	private CandidateUserDao candidateUserDao;
+	private UserDao userDao;
+	private VerificationCodeService verificationCodeService;
 	private ValidationService<CandidateUser> validationService;
-	private FakeMernisService fakeMernisService;
+	private UserCheckService checkService;
 	
 	@Autowired
-	public CandidateUserManager(CandidateUserDao candidateUserDao, ValidationService<CandidateUser> validationService, FakeMernisService fakeMernisService) {
+	public CandidateUserManager(CandidateUserDao candidateUserDao,
+			UserDao userDao,
+			VerificationCodeService verificationCodeService,
+			ValidationService<CandidateUser> validationService,
+			UserCheckService checkService) {
+		
 		this.candidateUserDao = candidateUserDao;
 		this.validationService = validationService;
-		this.fakeMernisService = fakeMernisService;
+		this.checkService = checkService;
+		this.userDao = userDao;
+		this.verificationCodeService = verificationCodeService;
 	}
 
 	@Override
@@ -47,16 +59,21 @@ public class CandidateUserManager implements CandidateUserService {
 			return new ErrorResult("Boş alan olamaz!");
 		}else if (!realEmail(candidateUser.getEmailAddress())) {
 			return new ErrorResult("Geçerli bir e-posta adresi yazınız.");
-		}else if (!passwordRule(candidateUser.getPassword(), candidateUser.getPasswordRepeat())) {
-			return new ErrorResult("Şifreler uyuşmuyor!");
-		}else if (!nationalityIdentityRule(candidateUser.getNationalityIdentity())) {
-			return new ErrorResult("TC Kimlik Numarası doğru değil.");
-		}else if (!fakeMernisService.isVerify(candidateUser.getFirstName(), candidateUser.getLastName(), candidateUser.getNationalityIdentity(), candidateUser.getBirthOfDate())) {
-			return new ErrorResult("Mernis doğrulama başarısız.");
+		}else if (!nationalityIdentityRule(candidateUser.getNationalityIdentity()) || candidateUserDao.getByNationalityIdentity(candidateUser.getNationalityIdentity())!=null) {
+			return new ErrorResult("TC Kimlik Numarası doğru değil veya zaten kayıtlı.");
+		}//else if (!checkService.confirm(candidateUser.getNationalityIdentity(), candidateUser.getFirstName(), candidateUser.getLastName(), candidateUser.getBirthOfDate())) {
+		//	return new ErrorResult("Mernis doğrulaması hatalı!");
+		//}
+		else if (userDao.getByEmailAddress(candidateUser.getEmailAddress())!=null) {
+			return new ErrorResult("Bu e-posta adresi zaten kayıtlı.");
 		}
+		candidateUser.setMailVerify(false);
+		User savedUser = userDao.save(candidateUser);
+		
+		String returnedCode = verificationCodeService.createActivitionCode(savedUser);
 		
 		candidateUserDao.save(candidateUser);
-		return new SuccessResult("Başarılı");
+		return new SuccessResult(candidateUser.getEmailAddress() + " adresine doğrulama kodu gönderildi.");
 		
 	}
 
@@ -89,13 +106,6 @@ public class CandidateUserManager implements CandidateUserService {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(nationalityIdentity);
 		if (!matcher.matches()) {
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean passwordRule(String password, String passwordRepeat) {
-		if (!passwordRepeat.equals(password)) {
 			return false;
 		}
 		return true;

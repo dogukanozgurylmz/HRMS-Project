@@ -2,10 +2,6 @@ package com.example.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,10 +11,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "employee_users")
+@Table(name = "employees")
 public class EmployeeUser extends User {
 
 	@Column(name = "first_name")
@@ -27,12 +23,8 @@ public class EmployeeUser extends User {
 	@Column(name = "last_name")
 	private String lastName;
 
-	public EmployeeUser() {
-
-	}
-
-	public EmployeeUser(int id, String emailAddress, String password, String passwordRepeat, String firstName, String lastName) {
-		super(id, emailAddress, password, passwordRepeat);
+	public EmployeeUser(int id, String emailAddress, String password, boolean isMailVerify, String firstName, String lastName) {
+		super(id, emailAddress, password, isMailVerify);
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
