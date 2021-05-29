@@ -49,9 +49,9 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByIsActiveTrueOrderByPostedDate() {
+	public DataResult<List<JobPosting>> getByIsActiveTrueOrderByReleaseDate() {
 
-		var result = this.jobPostingDao.getByIsActiveTrueOrderByPostedDate();
+		var result = this.jobPostingDao.getByIsActiveTrueOrderByReleaseDate();
 		return new SuccessDataResult<List<JobPosting>>(result, "İş ilanının süresi doldu.");
 
 	}

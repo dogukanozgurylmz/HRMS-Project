@@ -14,7 +14,7 @@ public interface JobPostingService {
 	
 	DataResult<List<JobPosting>> getByIsActiveTrueAndEmployerUser_companyName(String companyName);
 	
-	DataResult<List<JobPosting>> getByIsActiveTrueOrderByPostedDate();
+	DataResult<List<JobPosting>> getByIsActiveTrueOrderByReleaseDate();
 	
 	Result add(JobPosting jobPosting);
 	Result update(JobPosting jobPosting);
