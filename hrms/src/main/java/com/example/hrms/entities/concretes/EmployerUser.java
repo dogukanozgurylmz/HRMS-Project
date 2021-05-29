@@ -1,7 +1,10 @@
 package com.example.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +28,9 @@ public class EmployerUser extends User {
 	
 	@Column(name = "phone_number")
 	private String phone;
+	
+	@OneToMany(mappedBy = "employers")
+	private List<JobPosting> jobPostings;
 
 	public EmployerUser(int id, String email, String password, boolean isMailVerify, String companyName, String webAddress, String phone) {
 		super(id, email, password, isMailVerify);
