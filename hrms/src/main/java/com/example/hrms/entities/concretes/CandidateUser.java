@@ -1,8 +1,14 @@
 package com.example.hrms.entities.concretes;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,24 +23,31 @@ import lombok.NoArgsConstructor;
 @Table(name = "candidates")
 public class CandidateUser extends User {
 	
+	@NotBlank(message = "Ad alanı boş olamaz!")
+	@NotNull
 	@Column(name = "first_name")
 	private String firstName;
 
+	@NotBlank(message = "Soyad alanı boş olamaz!")
+	@NotNull
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "nationality_identity")
-	private String nationalityIdentity;
+	@NotBlank(message = "TC Kimlik No alanı boş olamaz!")
+	@NotNull
+	@Column(name = "national_identity")
+	private String nationalIdentity;
 
+	@NotNull
 	@Column(name = "birth_date")
-	private String birthOfDate;
+	private Date birthOfDate;
 
-	public CandidateUser(int id, String emailAddress, String password, boolean isMailVerify, String firstName, String lastName,
-			String nationalityIdentity, String birthOfDate) {
-		super(id, emailAddress, password, isMailVerify);
+	public CandidateUser(int id, String emailAddress, String password, String passwordRepeat, boolean verify, String firstName, String lastName,
+			String nationalIdentity, Date birthOfDate) {
+		super(id, emailAddress, password, passwordRepeat, verify);
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.nationalityIdentity = nationalityIdentity;
+		this.nationalIdentity = nationalIdentity;
 		this.birthOfDate = birthOfDate;
 	}
 

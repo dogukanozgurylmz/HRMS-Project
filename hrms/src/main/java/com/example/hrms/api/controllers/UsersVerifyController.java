@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.hrms.business.abstracts.VerificationCodeService;
+import com.example.hrms.business.abstracts.UsersVerifyService;
 import com.example.hrms.core.utilities.results.Result;
 
 @RestController
 @RequestMapping("/api/userverify")
-public class VerificationCodesController {
+public class UsersVerifyController {
 
-	private VerificationCodeService verificationCodeService;
+	private UsersVerifyService usersVerifyService;
 
 	@Autowired
-	public VerificationCodesController(VerificationCodeService verificationCodeService) {
+	public UsersVerifyController(UsersVerifyService usersVerifyService) {
 		super();
-		this.verificationCodeService = verificationCodeService;
+		this.usersVerifyService = usersVerifyService;
 	}
 
-	@GetMapping("/active/{code}")
-	public Result activeUser(@PathVariable String code) {
-		return verificationCodeService.activateUser(code);
+	@GetMapping("/{verifyCode}")
+	public Result activeUser(@PathVariable("verifyCode") String verifyCode) {
+		return usersVerifyService.verifyUser(verifyCode);
 	}
 	
 }

@@ -34,7 +34,7 @@ public class JobPositionManager implements JobPositionService {
 	@Override
 	public Result add(JobPosition jobPosition) {
 		
-		if (jobPositionDao.getByPosition(jobPosition.getPosition())!=null) {
+		if (!jobPositionDao.getByPosition(jobPosition.getPosition()).equals(null)) {
 			return new ErrorResult("Bu pozisyon daha önce kaydedildi.");
 		}
 		

@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,23 +26,29 @@ import lombok.NoArgsConstructor;
 @Table(name = "employers")
 public class EmployerUser extends User {
 
+	@NotBlank(message = "Şirketi adı alanı boş olamaz!")
+	@NotNull
 	@Column(name = "company_name")
 	private String companyName;
 
+	@NotBlank(message = "Web sitesi alanı boş olamaz!")
+	@NotNull
 	@Column(name = "web_address")
 	private String webAddress;
 	
 	@Column(name = "phone_number")
-	private String phone;
-	
+	private String phoneNumber;
+
 	@OneToMany(mappedBy = "employerUser")
 	private List<JobPosting> jobPostings;
 
-	public EmployerUser(int id, String email, String password, boolean isMailVerify, String companyName, String webAddress, String phone) {
-		super(id, email, password, isMailVerify);
+	public EmployerUser(int id, String emailAddress, String password, String passwordRepeat, boolean verify, String companyName, String webAddress, String phoneNumber) {
+		super(id, emailAddress, password, passwordRepeat, verify);
 		this.companyName = companyName;
 		this.webAddress = webAddress;
-		this.phone = phone;
+		this.phoneNumber = phoneNumber;
 	}
+
+	
 
 }

@@ -23,8 +23,8 @@ public class EmployeeUser extends User {
 	@Column(name = "last_name")
 	private String lastName;
 
-	public EmployeeUser(int id, String emailAddress, String password, boolean isMailVerify, String firstName, String lastName) {
-		super(id, emailAddress, password, isMailVerify);
+	public EmployeeUser(int id, String emailAddress, String password, String passwordRepeat, boolean verify, String firstName, String lastName) {
+		super(id, emailAddress, password, passwordRepeat, verify);
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}

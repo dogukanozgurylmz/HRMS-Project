@@ -13,6 +13,7 @@ import com.example.hrms.business.abstracts.JobPostingService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosting;
+import com.example.hrms.entities.dtos.JobPostingDto;
 
 @RestController
 @RequestMapping("/api/jobpostings")
@@ -31,19 +32,19 @@ public class JobPostingsController {
 		return this.jobPostingService.getAll();
 	}
 	
-	@GetMapping("/getByIsActiveTrue")
-	public DataResult<List<JobPosting>> getByIsActiveTrue(){
-		return this.jobPostingService.getByIsActiveTrue();
+	@GetMapping("/findByIsActive")
+	public DataResult<List<JobPostingDto>> findByIsActive(){
+		return this.jobPostingService.findByIsActive();
 	}
 	
-	@GetMapping("/getByIsActiveTrueAndEmployerUser_companyName")
-	public DataResult<List<JobPosting>> getByIsActiveTrueAndEmployerUser_companyName(String companyName){
-		return this.jobPostingService.getByIsActiveTrueAndEmployerUser_companyName(companyName);
+	@GetMapping("/findByIsActiveAndEmployerUser_companyName")
+	public DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName){
+		return this.jobPostingService.findByIsActiveAndEmployerUser_companyName(companyName);
 	}
 	
-	@GetMapping("/getByIsActiveTrueOrderByReleaseDate")
-	public DataResult<List<JobPosting>> getByIsActiveTrueOrderByReleaseDate(){
-		return this.jobPostingService.getByIsActiveTrueOrderByReleaseDate();
+	@GetMapping("/findByIsActiveOrderByApplicationDeadline")
+	public DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline(){
+		return this.jobPostingService.findByIsActiveOrderByApplicationDeadline();
 	}
 	
 	@PostMapping("/add")

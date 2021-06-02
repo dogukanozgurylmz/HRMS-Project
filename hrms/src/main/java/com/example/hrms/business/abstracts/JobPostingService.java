@@ -5,16 +5,17 @@ import java.util.List;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosting;
+import com.example.hrms.entities.dtos.JobPostingDto;
 
 public interface JobPostingService {
 
 	DataResult<List<JobPosting>> getAll();
 	
-	DataResult<List<JobPosting>> getByIsActiveTrue();
+	DataResult<List<JobPostingDto>> findByIsActive();
 	
-	DataResult<List<JobPosting>> getByIsActiveTrueAndEmployerUser_companyName(String companyName);
+	DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName);
 	
-	DataResult<List<JobPosting>> getByIsActiveTrueOrderByReleaseDate();
+	DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline();
 	
 	Result add(JobPosting jobPosting);
 	Result update(JobPosting jobPosting);

@@ -12,6 +12,7 @@ import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.JobPostingDao;
 import com.example.hrms.entities.concretes.JobPosting;
+import com.example.hrms.entities.dtos.JobPostingDto;
 
 @Service
 public class JobPostingManager implements JobPostingService {
@@ -33,26 +34,26 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByIsActiveTrue() {
+	public DataResult<List<JobPostingDto>> findByIsActive() {
 
-		var result = this.jobPostingDao.getByIsActiveTrue();
-		return new SuccessDataResult<List<JobPosting>>(result, "Aktif iş ilanları listelendi.");
-
-	}
-
-	@Override
-	public DataResult<List<JobPosting>> getByIsActiveTrueAndEmployerUser_companyName(String companyName) {
-
-		var result = this.jobPostingDao.getByIsActiveTrueAndEmployerUser_companyName(companyName);
-		return new SuccessDataResult<List<JobPosting>>(result, companyName + " şirketinin iş ilanları listelendi.");
+		var result = this.jobPostingDao.findByIsActive();
+		return new SuccessDataResult<List<JobPostingDto>>(result, "Aktif iş ilanları listelendi.");
 
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByIsActiveTrueOrderByReleaseDate() {
+	public DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName) {
 
-		var result = this.jobPostingDao.getByIsActiveTrueOrderByReleaseDate();
-		return new SuccessDataResult<List<JobPosting>>(result, "İş ilanının süresi doldu.");
+		var result = this.jobPostingDao.findByIsActiveAndEmployerUser_CompanyName(companyName);
+		return new SuccessDataResult<List<JobPostingDto>>(result, companyName.toLowerCase() + " şirketinin iş ilanları listelendi.");
+
+	}
+
+	@Override
+	public DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline() {
+
+		var result = this.jobPostingDao.findByIsActiveOrderByReleaseDate();
+		return new SuccessDataResult<List<JobPostingDto>>(result, "İş ilanının süresi doldu.");
 
 	}
 

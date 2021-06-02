@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.CandidateUserService;
 import com.example.hrms.business.abstracts.UserCheckService;
-import com.example.hrms.business.abstracts.ValidationService;
-import com.example.hrms.business.abstracts.VerificationCodeService;
+import com.example.hrms.business.abstracts.UsersVerifyService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
@@ -26,22 +25,19 @@ public class CandidateUserManager implements CandidateUserService {
 	
 	private CandidateUserDao candidateUserDao;
 	private UserDao userDao;
-	private VerificationCodeService verificationCodeService;
-	private ValidationService<CandidateUser> validationService;
+	private UsersVerifyService usersVerifyService;
 	private UserCheckService checkService;
 	
 	@Autowired
 	public CandidateUserManager(CandidateUserDao candidateUserDao,
 			UserDao userDao,
-			VerificationCodeService verificationCodeService,
-			ValidationService<CandidateUser> validationService,
+			UsersVerifyService usersVerifyService,
 			UserCheckService checkService) {
 		
 		this.candidateUserDao = candidateUserDao;
-		this.validationService = validationService;
 		this.checkService = checkService;
 		this.userDao = userDao;
-		this.verificationCodeService = verificationCodeService;
+		this.usersVerifyService = usersVerifyService;
 	}
 
 	@Override
@@ -55,24 +51,18 @@ public class CandidateUserManager implements CandidateUserService {
 	@Override
 	public Result add(CandidateUser candidateUser) {
 		
-		if (!validationService.isValid(candidateUser)) {
-			return new ErrorResult("Boş alan olamaz!");
-		}else if (!realEmail(candidateUser.getEmailAddress())) {
+		if (!realEmail(candidateUser.getEmailAddress())) {
 			return new ErrorResult("Geçerli bir e-posta adresi yazınız.");
-		}else if (!nationalityIdentityRule(candidateUser.getNationalityIdentity()) || candidateUserDao.getByNationalityIdentity(candidateUser.getNationalityIdentity())!=null) {
+		}else if (!nationalityIdentityRule(candidateUser.getNationalIdentity()) || candidateUserDao.getByNationalIdentity(candidateUser.getNationalIdentity())!=null) {
 			return new ErrorResult("TC Kimlik Numarası doğru değil veya zaten kayıtlı.");
-		}//else if (!checkService.confirm(candidateUser.getNationalityIdentity(), candidateUser.getFirstName(), candidateUser.getLastName(), candidateUser.getBirthOfDate())) {
-		//	return new ErrorResult("Mernis doğrulaması hatalı!");
-		//}
-		else if (userDao.getByEmailAddress(candidateUser.getEmailAddress())!=null) {
+		}else if (userDao.getByEmailAddress(candidateUser.getEmailAddress())!=null) {
 			return new ErrorResult("Bu e-posta adresi zaten kayıtlı.");
+		}else if (!candidateUser.getPassword().equals(candidateUser.getPasswordRepeat())) {
+			return new ErrorResult("Şifreler aynı değil!");
 		}
-		candidateUser.setMailVerify(false);
-		User savedUser = userDao.save(candidateUser);
-		
-		String returnedCode = verificationCodeService.createActivitionCode(savedUser);
-		
 		candidateUserDao.save(candidateUser);
+		this.usersVerifyService.createVerifyCode(candidateUser.getId());
+		this.usersVerifyService.sendMail(candidateUser.getEmailAddress());
 		return new SuccessResult(candidateUser.getEmailAddress() + " adresine doğrulama kodu gönderildi.");
 		
 	}
