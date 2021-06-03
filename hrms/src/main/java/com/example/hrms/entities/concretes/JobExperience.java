@@ -34,8 +34,9 @@ public class JobExperience {
 	@Column(name = "company_name")
 	private String companyName;
 	
-	@Column(name = "job_position_id")
-	private int jobPositionId;
+	@ManyToOne(targetEntity = JobPosition.class)
+	@JoinColumn(name = "job_position_id", referencedColumnName = "id")
+	private JobPosition jobPosition;
 	
 	@Column(name = "started_date")
 	private Date startedDate;
