@@ -1,6 +1,7 @@
 package com.example.hrms.entities.concretes;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +32,7 @@ public class Education {
 	@Column(name = "id")
 	private int id;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(targetEntity = Resume.class)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;
@@ -35,7 +41,7 @@ public class Education {
 	private String schoolName;
 	
 	@ManyToOne(targetEntity = Graduate.class)
-	@JoinColumn(name = "graduate_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "graduate_id", referencedColumnName = "id")
 	private Graduate graduate;
 	
 	@Column(name = "school_department")
@@ -48,6 +54,6 @@ public class Education {
 	private Date endedDate;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private Date createdDate=Date.valueOf(LocalDate.now());
 
 }
