@@ -1,6 +1,7 @@
 package com.example.hrms.entities.concretes;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +32,7 @@ public class JobExperience {
 	@Column(name = "id")
 	private int id;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(targetEntity = Resume.class)
 	@JoinColumn(name = "resume_id")
 	private Resume resume;
@@ -41,12 +45,13 @@ public class JobExperience {
 	private JobPosition jobPosition;
 	
 	@Column(name = "started_date")
-	private Date startedDate;
+	private LocalDate startedDate;
 	
 	@Column(name = "ended_date")
-	private Date endedDate;
+	private LocalDate endedDate;
 	
+	@JsonIgnore
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDateTime createdDate = LocalDateTime.now();
 	
 }

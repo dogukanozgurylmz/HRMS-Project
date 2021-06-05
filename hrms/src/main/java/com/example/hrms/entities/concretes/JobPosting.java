@@ -1,7 +1,6 @@
 package com.example.hrms.entities.concretes;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,12 +32,10 @@ public class JobPosting {
 	@JoinColumn(name = "employer_id")
 	private EmployerUser employerUser;
 
-	@NotBlank(message = "İş pozisyonu alanı boş bırakılamaz!")
 	@ManyToOne
 	@JoinColumn(name = "job_position_id")
 	private JobPosition jobPosition;
 
-	@NotBlank(message = "Şehir alanı boş bırakılamaz!")
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
@@ -58,10 +55,10 @@ public class JobPosting {
 	private int quota;
 
 	@Column(name = "release_date")
-	private LocalDateTime releaseDate;
+	private LocalDate releaseDate;
 
 	@Column(name = "application_deadline")
-	private LocalDateTime applicationDeadline;
+	private LocalDate applicationDeadline;
 
 	@Column(name = "is_active")
 	private boolean isActive;

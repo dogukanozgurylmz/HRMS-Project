@@ -1,6 +1,6 @@
 package com.example.hrms.entities.concretes;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitilazier", "handler" })
 @Table(name = "resumes")
 public class Resume {
 
@@ -31,10 +33,6 @@ public class Resume {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
-	@ManyToOne(targetEntity = CandidateUser.class)
-	@JoinColumn(name = "candidate_id")
-	private CandidateUser candidateUser;
 	
 	@Column(name = "github_link")
 	private String githubLink;
@@ -48,15 +46,19 @@ public class Resume {
 	@Column(name = "description")
 	private String description;
 	
+	@JsonIgnore
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDateTime createdDate = LocalDateTime.now();
 	
 	@Column(name = "update_date")
-	private Date updateDate;
+	private LocalDateTime updateDate;
 
 	@Column(name = "is_active")
 	private boolean isActive;
-
+	
+	@ManyToOne(targetEntity = CandidateUser.class)
+	@JoinColumn(name = "candidate_id")
+	private CandidateUser candidateUser;
 	
 	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL ) 
 	private List<Language> languages;

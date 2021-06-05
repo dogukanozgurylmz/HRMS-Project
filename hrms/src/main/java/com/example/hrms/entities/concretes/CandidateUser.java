@@ -1,8 +1,6 @@
 package com.example.hrms.entities.concretes;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,10 +38,10 @@ public class CandidateUser extends User {
 
 	@NotNull
 	@Column(name = "birth_date")
-	private Date birthOfDate;
+	private LocalDate birthOfDate;
 
 	public CandidateUser(int id, String emailAddress, String password, String passwordRepeat, boolean verify, String firstName, String lastName,
-			String nationalIdentity, Date birthOfDate) {
+			String nationalIdentity, LocalDate birthOfDate) {
 		super(id, emailAddress, password, passwordRepeat, verify);
 		this.firstName = firstName;
 		this.lastName = lastName;
