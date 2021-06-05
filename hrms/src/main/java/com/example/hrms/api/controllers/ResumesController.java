@@ -1,6 +1,5 @@
 package com.example.hrms.api.controllers;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +26,8 @@ import com.example.hrms.business.abstracts.ResumeService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.core.utilities.results.Result;
-import com.example.hrms.entities.concretes.Resume;
+import com.example.hrms.entities.dtos.ResumeGetDto;
+import com.example.hrms.entities.dtos.ResumePostDto;
 
 @RestController
 @RequestMapping("/api/resumes")
@@ -43,13 +42,18 @@ public class ResumesController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<Resume>> getAll(){
+	public DataResult<List<ResumeGetDto>> getAll(){
 		return this.resumeService.getAll();
 	}
 	
+	@GetMapping("/findAllByCandidateUserId")
+	public DataResult<List<ResumeGetDto>> findAllByCandidateUserId(int id) {
+		return this.resumeService.findAllByCandidateUserId(id);
+	}
+	
 	@PostMapping(value = "/add")
-	public ResponseEntity<?> add(@Valid @RequestBody Resume resume){
-		return ResponseEntity.ok(this.resumeService.add(resume));
+	public ResponseEntity<?> add(@Valid @RequestBody ResumePostDto resumePostDto){
+		return ResponseEntity.ok(this.resumeService.add(resumePostDto));
 	}
 	
 	@PutMapping("/uploadImage")

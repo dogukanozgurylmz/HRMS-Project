@@ -1,12 +1,16 @@
 package com.example.hrms.entities.concretes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +43,10 @@ public class CandidateUser extends User {
 	@NotNull
 	@Column(name = "birth_date")
 	private LocalDate birthOfDate;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidateUser")
+	private List<Resume> resume;
 
 	public CandidateUser(int id, String emailAddress, String password, String passwordRepeat, boolean verify, String firstName, String lastName,
 			String nationalIdentity, LocalDate birthOfDate) {
