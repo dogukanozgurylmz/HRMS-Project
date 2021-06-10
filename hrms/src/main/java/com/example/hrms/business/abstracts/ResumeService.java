@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.entities.concretes.Resume;
 import com.example.hrms.entities.dtos.ResumeGetDto;
 import com.example.hrms.entities.dtos.ResumePostDto;
 
@@ -13,7 +14,7 @@ public interface ResumeService {
 	
 	DataResult<List<ResumeGetDto>> getAll();
 	
-	DataResult<List<ResumeGetDto>> findAllByCandidateUserId(int id);
+	DataResult<List<Resume>> findAllByCandidateUserId(int id);
 	
 	Result add(ResumePostDto resumePostDto);
 	

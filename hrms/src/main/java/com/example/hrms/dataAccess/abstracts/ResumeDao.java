@@ -10,6 +10,6 @@ import com.example.hrms.entities.dtos.ResumeGetDto;
 
 public interface ResumeDao extends JpaRepository<Resume, Integer> {
 
-	List<ResumeGetDto> findAllByCandidateUserId(int candidateUserId);
+	List<Resume> findAllByCandidateUserId(int candidateUserId);
 	
 }

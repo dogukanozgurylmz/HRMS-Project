@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +27,13 @@ import com.example.hrms.business.abstracts.ResumeService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.entities.concretes.Resume;
 import com.example.hrms.entities.dtos.ResumeGetDto;
 import com.example.hrms.entities.dtos.ResumePostDto;
 
 @RestController
 @RequestMapping("/api/resumes")
+@CrossOrigin
 public class ResumesController {
 
 	private ResumeService resumeService;
@@ -47,7 +50,7 @@ public class ResumesController {
 	}
 	
 	@GetMapping("/findAllByCandidateUserId")
-	public DataResult<List<ResumeGetDto>> findAllByCandidateUserId(int id) {
+	public DataResult<List<Resume>> findAllByCandidateUserId(@RequestParam("id") int id) {
 		return this.resumeService.findAllByCandidateUserId(id);
 	}
 	

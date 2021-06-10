@@ -64,10 +64,10 @@ public class ResumeManager implements ResumeService {
 	}
 
 	@Override
-	public DataResult<List<ResumeGetDto>> findAllByCandidateUserId(int id) {
+	public DataResult<List<Resume>> findAllByCandidateUserId(int id) {
 		
-		var result = this.dtoConverterService.dtoConverter(this.resumeDao.findAllByCandidateUserId(id), ResumeGetDto.class);
-		return new SuccessDataResult<List<ResumeGetDto>>(result,"Data listelendi.");
+		var result = this.resumeDao.findAllByCandidateUserId(id);
+		return new SuccessDataResult<List<Resume>>(result,"Data listelendi.");
 		
 	}
 	

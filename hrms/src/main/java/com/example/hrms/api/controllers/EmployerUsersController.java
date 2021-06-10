@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import com.example.hrms.entities.concretes.EmployerUser;
 
 @RestController
 @RequestMapping("/api/employerusers")
+@CrossOrigin
 public class EmployerUsersController {
 
 	private EmployerUserService employerUserService;

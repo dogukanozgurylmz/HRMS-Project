@@ -15,13 +15,13 @@ import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosition;
 
 @RestController
-@RequestMapping("/api/jobtitles")
-public class JobTitlesController {
+@RequestMapping("/api/jobposition")
+public class JobPositionsController {
 	
 	private JobPositionService jobTitleService;
 
 	@Autowired
-	public JobTitlesController(JobPositionService jobTitleService) {
+	public JobPositionsController(JobPositionService jobTitleService) {
 		super();
 		this.jobTitleService = jobTitleService;
 	}

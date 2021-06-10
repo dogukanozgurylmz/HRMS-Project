@@ -3,6 +3,7 @@ package com.example.hrms.entities.dtos;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.hrms.entities.concretes.CandidateUser;
 import com.example.hrms.entities.concretes.Education;
 import com.example.hrms.entities.concretes.JobExperience;
 import com.example.hrms.entities.concretes.Language;
@@ -22,7 +23,7 @@ public class ResumeGetDto {
 	@JsonProperty(access = Access.READ_ONLY)
 	private int id;
 	
-	private int candidateUserId;
+	private CandidateUser candidate;
 	
 	private String githubLink;
 	

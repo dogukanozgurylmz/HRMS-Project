@@ -55,7 +55,7 @@ public class JobPosting {
 	private int quota;
 
 	@Column(name = "release_date")
-	private LocalDate releaseDate;
+	private LocalDate releaseDate = LocalDate.now();
 
 	@Column(name = "application_deadline")
 	private LocalDate applicationDeadline;

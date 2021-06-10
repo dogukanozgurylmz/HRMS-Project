@@ -25,7 +25,7 @@ import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.entities.concretes.Education;
 
 @RestController
-@RequestMapping(name = "api/education")
+@RequestMapping("/api/education")
 public class EducationController {
 	
 	private EducationService educationService;
