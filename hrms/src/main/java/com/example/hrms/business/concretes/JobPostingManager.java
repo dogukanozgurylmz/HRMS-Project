@@ -77,4 +77,14 @@ public class JobPostingManager implements JobPostingService {
 		return null;
 	}
 
+	@Override
+	public Result changeStatus(int id) {
+		
+		var result = this.jobPostingDao.getById(id);
+		result.setActive(true);
+		this.jobPostingDao.save(result);
+		return new SuccessResult("İlan aktif edildi.");
+	
+	}
+
 }

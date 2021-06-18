@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,6 +56,7 @@ public class JobPosting {
 	@Column(name = "quota")
 	private int quota;
 
+	@JsonIgnore
 	@Column(name = "release_date")
 	private LocalDate releaseDate = LocalDate.now();
 
@@ -61,7 +64,7 @@ public class JobPosting {
 	private LocalDate applicationDeadline;
 
 	@Column(name = "is_active")
-	private boolean isActive;
+	private boolean isActive = false;
 	
 	@ManyToOne
 	@JoinColumn(name = "work_type_id")

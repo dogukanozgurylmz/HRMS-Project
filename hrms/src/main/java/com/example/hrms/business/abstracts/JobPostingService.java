@@ -17,8 +17,12 @@ public interface JobPostingService {
 	
 	DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline();
 	
+	Result changeStatus(int id);
+	
 	Result add(JobPosting jobPosting);
+	
 	Result update(JobPosting jobPosting);
+	
 	Result delete(JobPosting jobPosting);
 	
 }

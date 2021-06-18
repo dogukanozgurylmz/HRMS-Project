@@ -6,4 +6,8 @@ import com.example.hrms.entities.concretes.EmployerUser;
 
 public interface EmployerUserDao extends JpaRepository<EmployerUser, Integer> {
 
+	EmployerUser getByCompanyName(String companyName);
+	
+	boolean existsByCompanyName(String companyName);
+	
 }
