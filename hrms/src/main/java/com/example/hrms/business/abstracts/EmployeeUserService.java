@@ -10,8 +10,12 @@ public interface EmployeeUserService {
 
 	DataResult<List<EmployeeUser>> getAll();
 	
+	DataResult<EmployeeUser> getById(int employeeId);
+	
 	Result add(EmployeeUser employeeUser);
+	
 	Result update(EmployeeUser employeeUser);
+	
 	Result delete(EmployeeUser employeeUser);
 	
 }

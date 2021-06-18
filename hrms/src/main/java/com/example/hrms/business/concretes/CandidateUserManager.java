@@ -51,19 +51,15 @@ public class CandidateUserManager implements CandidateUserService {
 	@Override
 	public Result add(CandidateUser candidateUser) {
 		
-		if (!realEmail(candidateUser.getEmailAddress())) {
-			return new ErrorResult("Geçerli bir e-posta adresi yazınız.");
-		}else if (!nationalityIdentityRule(candidateUser.getNationalIdentity()) || candidateUserDao.getByNationalIdentity(candidateUser.getNationalIdentity())!=null) {
-			return new ErrorResult("TC Kimlik Numarası doğru değil veya zaten kayıtlı.");
-		}else if (userDao.getByEmailAddress(candidateUser.getEmailAddress())!=null) {
+		if (!candidateUserDao.getByNationalIdentity(candidateUser.getNationalIdentity()).equals(null)) {
+			return new ErrorResult("TC Kimlik Numarası zaten kayıtlı.");
+		}
+		if (!userDao.getByEmailAddress(candidateUser.getEmailAddress()).equals(null)) {
 			return new ErrorResult("Bu e-posta adresi zaten kayıtlı.");
-		}else if (!candidateUser.getPassword().equals(candidateUser.getPasswordRepeat())) {
-			return new ErrorResult("Şifreler aynı değil!");
 		}
 		candidateUserDao.save(candidateUser);
-		this.usersVerifyService.createVerifyCode(candidateUser.getId());
-		this.usersVerifyService.sendMail(candidateUser.getEmailAddress());
-		return new SuccessResult(candidateUser.getEmailAddress() + " adresine doğrulama kodu gönderildi.");
+		
+		return new SuccessResult("Kaydedildi.");
 		
 	}
 
@@ -77,28 +73,6 @@ public class CandidateUserManager implements CandidateUserService {
 	public Result delete(CandidateUser candidateUser) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	
-	
-	private boolean realEmail(String email) {
-		String regex = "[a-z0-9!#$%&\'*+/=?^_\'{|}~-]+(?:.[a-z0-9!#$%&\'*+/=?^_\'{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(email);
-		if (!matcher.matches()) {
-			return false;
-		}
-		return true;
-	}
-	
-	private boolean nationalityIdentityRule(String nationalityIdentity) {
-		String regex = "^[1-9]{1}[0-9]{9}[02468]{1}$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(nationalityIdentity);
-		if (!matcher.matches()) {
-			return false;
-		}
-		return true;
 	}
 
 }

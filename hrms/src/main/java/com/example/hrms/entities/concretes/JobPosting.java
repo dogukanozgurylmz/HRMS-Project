@@ -62,5 +62,13 @@ public class JobPosting {
 
 	@Column(name = "is_active")
 	private boolean isActive;
+	
+	@ManyToOne
+	@JoinColumn(name = "work_type_id")
+	private WorkType workType;
+	
+	@ManyToOne
+	@JoinColumn(name = "working_time_id")
+	private WorkingTime workingTime;
 
 }

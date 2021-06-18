@@ -13,9 +13,9 @@ public class JobPostingDto {
 	
 	private int id;
 	
-	private String companyName;
+	private String employerUserCompanyName;
 	
-	private String position;
+	private String jobPositionPosition;
 	
 	private int quota;
 	

@@ -52,4 +52,10 @@ public class EmployeeUserManager implements EmployeeUserService {
 		return null;
 	}
 
+	@Override
+	public DataResult<EmployeeUser> getById(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
