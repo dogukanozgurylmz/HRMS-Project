@@ -80,11 +80,20 @@ public class JobPostingManager implements JobPostingService {
 	@Override
 	public Result changeStatus(int id) {
 		
-		var result = this.jobPostingDao.getById(id);
+		if (this.jobPostingDao.getOne(id).equals(null)) {
+			return new SuccessResult("Başarısız");
+		}
+		var result = this.jobPostingDao.getOne(id);
 		result.setActive(true);
 		this.jobPostingDao.save(result);
-		return new SuccessResult("İlan aktif edildi.");
-	
+		return new SuccessResult("Başarılı");
+	}
+
+	@Override
+	public DataResult<JobPosting> getById(int id) {
+		
+		return new SuccessDataResult<JobPosting>(this.jobPostingDao.getById(id));
+		
 	}
 
 }

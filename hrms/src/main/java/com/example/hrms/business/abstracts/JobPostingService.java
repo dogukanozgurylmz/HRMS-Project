@@ -11,6 +11,8 @@ public interface JobPostingService {
 
 	DataResult<List<JobPosting>> getAll();
 	
+	DataResult<JobPosting> getById(int id);
+	
 	DataResult<List<JobPostingDto>> findByIsActive();
 	
 	DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName);
