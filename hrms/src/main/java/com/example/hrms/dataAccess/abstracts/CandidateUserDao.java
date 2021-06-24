@@ -8,6 +8,6 @@ import com.example.hrms.entities.concretes.CandidateUser;
 @Repository
 public interface CandidateUserDao extends JpaRepository<CandidateUser, Integer> {
 
-	CandidateUser getByNationalIdentity(String nationalIdentity);
+	CandidateUser findBynationalIdentity(String nationalIdentity);
 	
 }

@@ -42,8 +42,10 @@ public class EmployeeUserManager implements EmployeeUserService {
 
 	@Override
 	public Result update(EmployeeUser employeeUser) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		this.employeeUserDao.save(employeeUser);
+		return new SuccessResult("Güncellendi");
+		
 	}
 
 	@Override

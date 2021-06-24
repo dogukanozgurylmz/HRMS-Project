@@ -16,7 +16,7 @@ public interface ResumeService {
 	
 	DataResult<List<Resume>> findAllByCandidateUserId(int id);
 	
-	Result add(ResumePostDto resumePostDto);
+	Result add(Resume resume);
 	
 	Result saveImage(MultipartFile file, int resumeId );
 	

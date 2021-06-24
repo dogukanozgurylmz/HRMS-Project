@@ -51,12 +51,6 @@ public class CandidateUserManager implements CandidateUserService {
 	@Override
 	public Result add(CandidateUser candidateUser) {
 		
-		if (!candidateUserDao.getByNationalIdentity(candidateUser.getNationalIdentity()).equals(null)) {
-			return new ErrorResult("TC Kimlik Numarası zaten kayıtlı.");
-		}
-		if (!userDao.getByEmailAddress(candidateUser.getEmailAddress()).equals(null)) {
-			return new ErrorResult("Bu e-posta adresi zaten kayıtlı.");
-		}
 		candidateUserDao.save(candidateUser);
 		
 		return new SuccessResult("Kaydedildi.");
@@ -73,6 +67,13 @@ public class CandidateUserManager implements CandidateUserService {
 	public Result delete(CandidateUser candidateUser) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public DataResult<CandidateUser> findByNationalIdentity(String nationalIdentity) {
+		
+		return new SuccessDataResult<CandidateUser>(candidateUserDao.findBynationalIdentity(nationalIdentity));
+		
 	}
 
 }

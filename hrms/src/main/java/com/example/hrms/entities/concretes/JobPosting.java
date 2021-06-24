@@ -56,7 +56,6 @@ public class JobPosting {
 	@Column(name = "quota")
 	private int quota;
 
-	@JsonIgnore
 	@Column(name = "release_date")
 	private LocalDate releaseDate = LocalDate.now();
 

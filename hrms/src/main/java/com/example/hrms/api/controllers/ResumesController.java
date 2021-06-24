@@ -55,8 +55,8 @@ public class ResumesController {
 	}
 	
 	@PostMapping(value = "/add")
-	public ResponseEntity<?> add(@Valid @RequestBody ResumePostDto resumePostDto){
-		return ResponseEntity.ok(this.resumeService.add(resumePostDto));
+	public ResponseEntity<?> add(@Valid @RequestBody Resume resume){
+		return ResponseEntity.ok(this.resumeService.add(resume));
 	}
 	
 	@PutMapping("/uploadImage")

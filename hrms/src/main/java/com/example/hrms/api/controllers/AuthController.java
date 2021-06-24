@@ -1,5 +1,7 @@
 package com.example.hrms.api.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import com.example.hrms.business.abstracts.AuthService;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.CandidateUser;
 import com.example.hrms.entities.concretes.EmployerUser;
+import com.example.hrms.entities.dtos.CandidateRegisterDto;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,14 +29,14 @@ public class AuthController {
 	}
 	
 	@PostMapping("/registerCandidate")
-	public Result registerCandidate(@RequestBody CandidateUser candidateUser) {
+	public Result registerCandidate(@Valid @RequestBody CandidateUser candidateUser) {
 		
 		return this.authService.registerCandidate(candidateUser);
 		
 	}
 	
 	@PostMapping("/registerEmployer")
-	public Result registerCandidate(@RequestBody EmployerUser employerUser) {
+	public Result registerEmployer(@Valid @RequestBody EmployerUser employerUser) {
 		
 		return this.authService.registerEmployer(employerUser);
 		

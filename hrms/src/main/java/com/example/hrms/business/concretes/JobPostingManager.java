@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.JobPostingService;
+import com.example.hrms.core.utilities.dtoConverter.abstracts.DtoConverterService;
 import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
@@ -18,11 +20,13 @@ import com.example.hrms.entities.dtos.JobPostingDto;
 public class JobPostingManager implements JobPostingService {
 
 	private JobPostingDao jobPostingDao;
+	private DtoConverterService dtoConverterService;
 
 	@Autowired
-	public JobPostingManager(JobPostingDao jobPostingDao) {
+	public JobPostingManager(JobPostingDao jobPostingDao, DtoConverterService dtoConverterService) {
 		super();
 		this.jobPostingDao = jobPostingDao;
+		this.dtoConverterService = dtoConverterService;
 	}
 
 	@Override
@@ -34,10 +38,13 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<List<JobPostingDto>> findByIsActive() {
+	public DataResult<List<JobPosting>> findByIsActive(boolean status) {
 
-		var result = this.jobPostingDao.findByIsActive();
-		return new SuccessDataResult<List<JobPostingDto>>(result, "Aktif iş ilanları listelendi.");
+		var result = this.jobPostingDao.findByIsActive(status);
+		if (status==false) {
+			return new SuccessDataResult<List<JobPosting>>(result, "Pasif iş ilanları listelendi.");
+		}
+		return new SuccessDataResult<List<JobPosting>>(result, "Aktif iş ilanları listelendi.");
 
 	}
 
@@ -52,7 +59,7 @@ public class JobPostingManager implements JobPostingService {
 	@Override
 	public DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline() {
 
-		var result = this.jobPostingDao.findByIsActiveOrderByReleaseDate();
+		var result = this.jobPostingDao.findByIsActiveOrderByApplicationDeadline();
 		return new SuccessDataResult<List<JobPostingDto>>(result, "İş ilanının süresi doldu.");
 
 	}
@@ -72,9 +79,13 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public Result delete(JobPosting jobPosting) {
-		// TODO Auto-generated method stub
-		return null;
+	public Result delete(int id) {
+		
+		if (this.jobPostingDao.getOne(id).equals(null)) {
+			return new ErrorResult("Başarısız");
+		}
+		this.jobPostingDao.deleteById(id);
+		return new SuccessResult("Silindi");
 	}
 
 	@Override

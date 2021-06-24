@@ -27,7 +27,7 @@ public class ResumeGetDto {
 	
 	private String candidateUserLastName;
 	
-	private String candidateUserEmail;
+	private String candidateUserEmailAddress;
 	
 	private String githubLink;
 	

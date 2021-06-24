@@ -10,6 +10,8 @@ public interface CandidateUserService {
 
 	DataResult<List<CandidateUser>> getAll();
 	
+	DataResult<CandidateUser> findByNationalIdentity(String nationalIdentity);
+	
 	Result add(CandidateUser candidateUser);
 	Result update(CandidateUser candidateUser);
 	Result delete(CandidateUser candidateUser);

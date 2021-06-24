@@ -13,7 +13,7 @@ public interface JobPostingService {
 	
 	DataResult<JobPosting> getById(int id);
 	
-	DataResult<List<JobPostingDto>> findByIsActive();
+	DataResult<List<JobPosting>> findByIsActive(boolean status);
 	
 	DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName);
 	
@@ -25,6 +25,6 @@ public interface JobPostingService {
 	
 	Result update(JobPosting jobPosting);
 	
-	Result delete(JobPosting jobPosting);
+	Result delete(int id);
 	
 }

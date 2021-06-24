@@ -36,8 +36,8 @@ public class JobPostingsController {
 	}
 	
 	@GetMapping("/findByIsActive")
-	public DataResult<List<JobPostingDto>> findByIsActive(){
-		return this.jobPostingService.findByIsActive();
+	public DataResult<List<JobPosting>> findByIsActive(boolean status){
+		return this.jobPostingService.findByIsActive(status);
 	}
 	
 	@GetMapping("/findByIsActiveAndEmployerUser_companyName")
@@ -55,7 +55,12 @@ public class JobPostingsController {
 		return this.jobPostingService.add(jobPosting);
 	}
 	
-	@PostMapping("/changeStatus")
+	@PostMapping("/delete")
+	public Result delete(@RequestParam int id) {
+		return this.jobPostingService.delete(id);
+	}
+	
+	@GetMapping("/changeStatus")
 	public Result changeStatus(int id) {
 		return this.jobPostingService.changeStatus(id);
 	}

@@ -44,9 +44,9 @@ public class ResumeManager implements ResumeService {
 	}
 
 	@Override
-	public Result add(ResumePostDto resumePostDto) {
+	public Result add(Resume resume) {
 		
-		resumeDao.save((Resume) dtoConverterService.dtoClassConverter(resumePostDto, Resume.class));
+		resumeDao.save((Resume) dtoConverterService.dtoClassConverter(resume, Resume.class));
 		return new SuccessResult("Kayıt Başarılı");
 		
 	}
