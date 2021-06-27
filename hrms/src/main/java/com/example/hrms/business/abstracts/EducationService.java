@@ -14,4 +14,8 @@ public interface EducationService {
 	
 	Result add(Education education);
 	
+	Result update(Education education);
+	
+	Result delete(int id);
+	
 }

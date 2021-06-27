@@ -14,7 +14,7 @@ public interface EmployeeUserService {
 	
 	Result add(EmployeeUser employeeUser);
 	
-	Result update(EmployeeUser employeeUser);
+	Result update(EmployeeUser employeeUserToUpdate);
 	
 	Result delete(EmployeeUser employeeUser);
 	

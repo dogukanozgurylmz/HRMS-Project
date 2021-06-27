@@ -33,17 +33,16 @@ public class EmployeeUserManager implements EmployeeUserService {
 	@Override
 	public Result add(EmployeeUser employeeUser) {
 		
-		
-		
 		employeeUserDao.save(employeeUser);
 		return new SuccessResult("Başarılı");
 		
 	}
 
 	@Override
-	public Result update(EmployeeUser employeeUser) {
+	public Result update(EmployeeUser employeeUserToUpdate) {
+
 		
-		this.employeeUserDao.save(employeeUser);
+		this.employeeUserDao.save(employeeUserToUpdate);
 		return new SuccessResult("Güncellendi");
 		
 	}

@@ -59,6 +59,16 @@ public class ResumesController {
 		return ResponseEntity.ok(this.resumeService.add(resume));
 	}
 	
+	@PostMapping(value = "/update")
+	public ResponseEntity<?> update(@Valid @RequestBody Resume resume){
+		return ResponseEntity.ok(this.resumeService.update(resume));
+	}
+	
+	@PostMapping(value = "/delete")
+	public ResponseEntity<?> delete(@Valid @RequestBody int id){
+		return ResponseEntity.ok(this.resumeService.delete(id));
+	}
+	
 	@PutMapping("/uploadImage")
 	public Result saveImage(@RequestBody MultipartFile file, @RequestParam int resumeId ){
 		return this.resumeService.saveImage(file, resumeId);

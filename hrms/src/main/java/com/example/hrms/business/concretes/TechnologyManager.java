@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.TechnologyService;
 import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
@@ -37,6 +38,23 @@ public class TechnologyManager implements TechnologyService {
 		this.technologyDao.save(technology);
 		return new SuccessResult("Eklendi");
 		
+	}
+
+	@Override
+	public Result update(Technology technology) {
+		
+		this.technologyDao.save(technology);
+		return new SuccessResult("Güncellendi");
+	}
+
+	@Override
+	public Result delete(int id) {
+
+		if (this.technologyDao.getOne(id).equals(null)) {
+			return new ErrorResult("Başarısız");
+		}
+		this.technologyDao.deleteById(id);
+		return new SuccessResult("Silindi");
 	}
 
 }

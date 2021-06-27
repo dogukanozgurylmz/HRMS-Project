@@ -12,4 +12,8 @@ public interface GraduateService {
 	
 	Result add(Graduate graduate);
 	
+	Result update(Graduate graduate);
+	
+	Result delete(int id);
+	
 }

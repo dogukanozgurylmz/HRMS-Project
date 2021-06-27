@@ -18,6 +18,10 @@ public interface ResumeService {
 	
 	Result add(Resume resume);
 	
+	Result update(Resume resumeToUpdate);
+	
+	Result delete(int id);
+	
 	Result saveImage(MultipartFile file, int resumeId );
 	
 }

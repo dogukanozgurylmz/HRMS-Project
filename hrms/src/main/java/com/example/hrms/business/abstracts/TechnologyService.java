@@ -11,5 +11,9 @@ public interface TechnologyService {
 	DataResult<List<Technology>> getAll();
 	
 	Result add(Technology technology);
+
+	Result update(Technology technology);
+	
+	Result delete(int id);
 	
 }

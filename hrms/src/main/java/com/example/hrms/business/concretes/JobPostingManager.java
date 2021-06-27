@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.hrms.business.abstracts.JobPostingService;
 import com.example.hrms.core.utilities.dtoConverter.abstracts.DtoConverterService;
 import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
@@ -43,9 +44,11 @@ public class JobPostingManager implements JobPostingService {
 		var result = this.jobPostingDao.findByIsActive(status);
 		if (status==false) {
 			return new SuccessDataResult<List<JobPosting>>(result, "Pasif iş ilanları listelendi.");
+		}if (status==true) {
+			return new SuccessDataResult<List<JobPosting>>(result, "Aktif iş ilanları listelendi.");
 		}
-		return new SuccessDataResult<List<JobPosting>>(result, "Aktif iş ilanları listelendi.");
-
+		return new ErrorDataResult<List<JobPosting>>();
+		
 	}
 
 	@Override

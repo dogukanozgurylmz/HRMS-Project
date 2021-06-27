@@ -12,4 +12,8 @@ public interface LanguageService {
 	
 	Result add(Language language);
 	
+	Result update(Language language);
+	
+	Result delete(int id);
+	
 }

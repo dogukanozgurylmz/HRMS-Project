@@ -14,4 +14,8 @@ public interface JobExperienceService {
 	
 	Result add(JobExperience jobExperience);
 	
+	Result update(JobExperience jobExperience);
+	
+	Result delete(int id);
+	
 }

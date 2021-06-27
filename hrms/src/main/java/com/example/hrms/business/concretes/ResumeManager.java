@@ -11,6 +11,7 @@ import com.example.hrms.business.abstracts.ResumeService;
 import com.example.hrms.core.cloudinary.CloudinaryImageService;
 import com.example.hrms.core.utilities.dtoConverter.abstracts.DtoConverterService;
 import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
 import com.example.hrms.core.utilities.results.SuccessResult;
@@ -69,6 +70,24 @@ public class ResumeManager implements ResumeService {
 		var result = this.resumeDao.findAllByCandidateUserId(id);
 		return new SuccessDataResult<List<Resume>>(result,"Data listelendi.");
 		
+	}
+
+	@Override
+	public Result update(Resume resumeToUpdate) {
+		
+		this.resumeDao.save(resumeToUpdate);
+		return new SuccessResult("Güncellendi");
+		
+	}
+
+	@Override
+	public Result delete(int id) {
+		
+		if (this.resumeDao.getOne(id).equals(null)) {
+			return new ErrorResult("Başarısız");
+		}
+		this.resumeDao.deleteById(id);
+		return new SuccessResult("Silindi");
 	}
 	
 }
