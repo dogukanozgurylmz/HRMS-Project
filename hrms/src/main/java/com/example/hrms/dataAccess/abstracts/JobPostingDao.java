@@ -1,6 +1,8 @@
 package com.example.hrms.dataAccess.abstracts;
 
 import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -33,5 +35,7 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 	JobPosting getById(int id);
 	
 	List<JobPosting> findByIsActive(boolean status);
+	
+	List<JobPosting> getByIsActive(boolean status, Pageable pageable);
 	
 }

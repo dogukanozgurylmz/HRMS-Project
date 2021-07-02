@@ -43,6 +43,11 @@ public class JobExperiencesController {
 		return this.jobExperienceService.getAll();
 	}
 	
+	@GetMapping("/findByResumeId")
+	public DataResult<List<JobExperience>> findByResumeId(int id){
+		return this.jobExperienceService.findByResumeId(id);
+	}
+	
 	@GetMapping("/getallsorted")
 	public DataResult<List<JobExperience>> getAllSorted(){
 		return this.jobExperienceService.getAllSorted();

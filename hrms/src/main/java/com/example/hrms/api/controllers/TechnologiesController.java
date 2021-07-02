@@ -26,7 +26,7 @@ import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.entities.concretes.Technology;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/technologies")
 @CrossOrigin
 public class TechnologiesController {
 
@@ -41,6 +41,11 @@ public class TechnologiesController {
 	@GetMapping("/getall")
 	public DataResult<List<Technology>> getAll(){
 		return this.technologyService.getAll();
+	}
+	
+	@GetMapping("/findByResumeId")
+	public DataResult<List<Technology>> findByResumeId(int id) {
+		return this.technologyService.findByResumeId(id);
 	}
 	
 	@PostMapping(value = "/add")

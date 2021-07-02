@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumeGetDto {
 
-	@JsonProperty(access = Access.READ_ONLY)
+	
 	private int id;
 	
 	private String candidateUserFirstName;

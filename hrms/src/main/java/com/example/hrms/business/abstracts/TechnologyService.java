@@ -10,6 +10,8 @@ public interface TechnologyService {
 
 	DataResult<List<Technology>> getAll();
 	
+	DataResult<List<Technology>> findByResumeId(int id);
+	
 	Result add(Technology technology);
 
 	Result update(Technology technology);

@@ -43,6 +43,11 @@ public class LanguagesController {
 		return this.languageService.getAll();
 	}
 	
+	@GetMapping("/findByResumeId")
+	public DataResult<List<Language>> findByResumeId(int id){
+		return this.languageService.findByResumeId(id);
+	}
+	
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> add(@Valid @RequestBody Language language) {
 		return ResponseEntity.ok(this.languageService.add(language));

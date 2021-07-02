@@ -62,4 +62,11 @@ public class JobExperienceManager implements JobExperienceService {
 		return new SuccessResult("Silindi");
 	}
 
+	@Override
+	public DataResult<List<JobExperience>> findByResumeId(int id) {
+		
+		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findByResumeIdOrderByEndedDateDesc(id),"Data getirildi.");
+		
+	}
+
 }

@@ -57,4 +57,11 @@ public class TechnologyManager implements TechnologyService {
 		return new SuccessResult("Silindi");
 	}
 
+	@Override
+	public DataResult<List<Technology>> findByResumeId(int id) {
+		
+		return new SuccessDataResult<List<Technology>>(this.technologyDao.findByResumeId(id),"Data getirildi");
+		
+	}
+
 }

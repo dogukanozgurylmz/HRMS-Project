@@ -8,13 +8,14 @@ import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Resume;
 import com.example.hrms.entities.dtos.ResumeGetDto;
-import com.example.hrms.entities.dtos.ResumePostDto;
 
 public interface ResumeService {
 	
-	DataResult<List<ResumeGetDto>> getAll();
+	DataResult<List<Resume>> getAll();
 	
 	DataResult<List<Resume>> findAllByCandidateUserId(int id);
+	
+	DataResult<Resume> getById(int id);
 	
 	Result add(Resume resume);
 	

@@ -67,4 +67,11 @@ public class EducationManager implements EducationService {
 		return new SuccessResult("Silindi");
 	}
 
+	@Override
+	public DataResult<List<Education>> findByResumeId(int id) {
+		
+		return new SuccessDataResult<List<Education>>(this.educationDao.findByResumeId(id),"Data getirildi.");
+		
+	}
+
 }

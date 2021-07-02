@@ -10,6 +10,8 @@ public interface EducationService {
 
 	DataResult<List<Education>> getAll();
 	
+	DataResult<List<Education>> findByResumeId(int id);
+	
 	DataResult<List<Education>> getAllSorted();
 	
 	Result add(Education education);

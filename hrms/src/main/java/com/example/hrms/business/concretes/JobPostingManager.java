@@ -3,6 +3,8 @@ package com.example.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.hrms.business.abstracts.JobPostingService;
@@ -42,9 +44,9 @@ public class JobPostingManager implements JobPostingService {
 	public DataResult<List<JobPosting>> findByIsActive(boolean status) {
 
 		var result = this.jobPostingDao.findByIsActive(status);
-		if (status==false) {
+		if (!status) {
 			return new SuccessDataResult<List<JobPosting>>(result, "Pasif iş ilanları listelendi.");
-		}if (status==true) {
+		}if (status) {
 			return new SuccessDataResult<List<JobPosting>>(result, "Aktif iş ilanları listelendi.");
 		}
 		return new ErrorDataResult<List<JobPosting>>();
@@ -107,6 +109,14 @@ public class JobPostingManager implements JobPostingService {
 	public DataResult<JobPosting> getById(int id) {
 		
 		return new SuccessDataResult<JobPosting>(this.jobPostingDao.getById(id));
+		
+	}
+
+	@Override
+	public DataResult<List<JobPosting>> getAll(int pageNo, int pageSize) {
+		
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByIsActive(true, pageable),"Listelendi");
 		
 	}
 

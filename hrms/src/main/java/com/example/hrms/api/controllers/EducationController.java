@@ -43,6 +43,11 @@ public class EducationController {
 		return this.educationService.getAll();
 	}
 	
+	@GetMapping("/findByResumeId")
+	public DataResult<List<Education>> findByResumeId(int id){
+		return this.educationService.findByResumeId(id);
+	}
+	
 	@GetMapping("/getallsorted")
 	public DataResult<List<Education>> getAllSorted(){
 		return this.educationService.getAllSorted();

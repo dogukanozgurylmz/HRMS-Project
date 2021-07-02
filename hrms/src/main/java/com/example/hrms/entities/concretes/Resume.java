@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitilazier", "handler" })
 @Table(name = "resumes")
 public class Resume {
 
@@ -46,7 +45,6 @@ public class Resume {
 	@Column(name = "description")
 	private String description;
 	
-	@JsonIgnore
 	@Column(name = "created_date")
 	private LocalDateTime createdDate = LocalDateTime.now();
 	

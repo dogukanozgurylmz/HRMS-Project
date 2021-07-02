@@ -45,13 +45,18 @@ public class ResumesController {
 	}
 
 	@GetMapping("/getall")
-	public DataResult<List<ResumeGetDto>> getAll(){
+	public DataResult<List<Resume>> getAll(){
 		return this.resumeService.getAll();
 	}
 	
 	@GetMapping("/findAllByCandidateUserId")
-	public DataResult<List<Resume>> findAllByCandidateUserId(@RequestParam("id") int id) {
+	public DataResult<List<Resume>> findAllByCandidateUserId(@RequestParam int id) {
 		return this.resumeService.findAllByCandidateUserId(id);
+	}
+	
+	@GetMapping("/getById")
+	public DataResult<Resume> getById(@RequestParam int id) {
+		return this.resumeService.getById(id);
 	}
 	
 	@PostMapping(value = "/add")

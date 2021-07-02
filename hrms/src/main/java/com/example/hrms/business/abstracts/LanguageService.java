@@ -10,6 +10,8 @@ public interface LanguageService {
 
 	DataResult<List<Language>> getAll();
 	
+	DataResult<List<Language>> findByResumeId(int id);
+	
 	Result add(Language language);
 	
 	Result update(Language language);

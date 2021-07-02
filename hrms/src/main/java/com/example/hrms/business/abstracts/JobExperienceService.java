@@ -10,6 +10,8 @@ public interface JobExperienceService {
 
 	DataResult<List<JobExperience>> getAll();
 	
+	DataResult<List<JobExperience>> findByResumeId(int id);
+	
 	DataResult<List<JobExperience>> getAllSorted();
 	
 	Result add(JobExperience jobExperience);

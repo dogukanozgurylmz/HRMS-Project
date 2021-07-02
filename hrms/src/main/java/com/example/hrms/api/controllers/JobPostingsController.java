@@ -35,6 +35,11 @@ public class JobPostingsController {
 		return this.jobPostingService.getAll();
 	}
 	
+	@GetMapping("/getallByPage")
+	DataResult<List<JobPosting>> getAll(int pageNo, int pageSize){
+		return this.jobPostingService.getAll(pageNo, pageSize);
+	}
+	
 	@GetMapping("/findByIsActive")
 	public DataResult<List<JobPosting>> findByIsActive(boolean status){
 		return this.jobPostingService.findByIsActive(status);

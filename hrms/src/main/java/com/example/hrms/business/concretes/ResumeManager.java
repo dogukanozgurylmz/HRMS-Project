@@ -11,6 +11,7 @@ import com.example.hrms.business.abstracts.ResumeService;
 import com.example.hrms.core.cloudinary.CloudinaryImageService;
 import com.example.hrms.core.utilities.dtoConverter.abstracts.DtoConverterService;
 import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.core.utilities.results.ErrorDataResult;
 import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
@@ -37,10 +38,10 @@ public class ResumeManager implements ResumeService {
 	}
 
 	@Override
-	public DataResult<List<ResumeGetDto>> getAll() {
+	public DataResult<List<Resume>> getAll() {
 		
-		var result = this.dtoConverterService.dtoConverter(this.resumeDao.findAll(), ResumeGetDto.class);
-		return new SuccessDataResult<List<ResumeGetDto>>(result,"Data listelendi.");
+		//var result = this.dtoConverterService.dtoConverter(this.resumeDao.findAll(), ResumeGetDto.class);
+		return new SuccessDataResult<List<Resume>>(this.resumeDao.findAll(),"Data listelendi.");
 	
 	}
 
@@ -88,6 +89,17 @@ public class ResumeManager implements ResumeService {
 		}
 		this.resumeDao.deleteById(id);
 		return new SuccessResult("Silindi");
+	}
+
+	@Override
+	public DataResult<Resume> getById(int id) {
+		
+		var result = this.resumeDao.findById(id);
+		if (result==null) {
+			return new ErrorDataResult<Resume>("Başarısız");
+		}
+		return new SuccessDataResult<Resume>(result,"Data getirildi");
+		
 	}
 	
 }

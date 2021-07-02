@@ -8,4 +8,6 @@ import com.example.hrms.entities.concretes.Education;
 
 public interface EducationDao extends JpaRepository<Education, Integer> {
 	
+	List<Education> findByResumeId(int id);
+	
 }
