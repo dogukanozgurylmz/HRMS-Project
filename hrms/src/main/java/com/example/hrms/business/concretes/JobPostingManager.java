@@ -18,6 +18,7 @@ import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.JobPostingDao;
 import com.example.hrms.entities.concretes.JobPosting;
 import com.example.hrms.entities.dtos.JobPostingDto;
+import com.example.hrms.entities.dtos.JobPostingFilter;
 
 @Service
 public class JobPostingManager implements JobPostingService {
@@ -117,6 +118,14 @@ public class JobPostingManager implements JobPostingService {
 		
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
 		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByIsActive(true, pageable),"Listelendi");
+		
+	}
+
+	@Override
+	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
+		
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByFilter(jobPostingFilter, pageable).getContent(),"Data getirildi.");
 		
 	}
 

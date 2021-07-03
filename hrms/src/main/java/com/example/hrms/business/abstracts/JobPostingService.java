@@ -6,6 +6,7 @@ import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosting;
 import com.example.hrms.entities.dtos.JobPostingDto;
+import com.example.hrms.entities.dtos.JobPostingFilter;
 
 public interface JobPostingService {
 
@@ -20,6 +21,8 @@ public interface JobPostingService {
 	DataResult<List<JobPostingDto>> findByIsActiveAndEmployerUser_companyName(String companyName);
 	
 	DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline();
+	
+	DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter);
 	
 	Result changeStatus(int id);
 	

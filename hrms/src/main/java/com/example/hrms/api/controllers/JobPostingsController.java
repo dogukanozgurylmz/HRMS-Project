@@ -16,6 +16,7 @@ import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosting;
 import com.example.hrms.entities.dtos.JobPostingDto;
+import com.example.hrms.entities.dtos.JobPostingFilter;
 
 @RestController
 @RequestMapping("/api/jobpostings")
@@ -68,6 +69,11 @@ public class JobPostingsController {
 	@GetMapping("/changeStatus")
 	public Result changeStatus(int id) {
 		return this.jobPostingService.changeStatus(id);
+	}
+	
+	@GetMapping("/getByJobPostingFilter")
+	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
+		return this.jobPostingService.getByFilter(pageNo, pageSize, jobPostingFilter);
 	}
 	
 }
