@@ -3,6 +3,7 @@ package com.example.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +73,7 @@ public class JobPostingsController {
 	}
 	
 	@GetMapping("/getByJobPostingFilter")
-	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
+	public DataResult<Page<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
 		return this.jobPostingService.getByFilter(pageNo, pageSize, jobPostingFilter);
 	}
 	

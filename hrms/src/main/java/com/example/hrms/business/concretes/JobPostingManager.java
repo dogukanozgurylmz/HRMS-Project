@@ -3,6 +3,7 @@ package com.example.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -122,10 +123,10 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
+	public DataResult<Page<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
 		
 		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByFilter(jobPostingFilter, pageable).getContent(),"Data getirildi.");
+		return new SuccessDataResult<Page<JobPosting>>(this.jobPostingDao.getByFilter(jobPostingFilter, pageable),"Data getirildi.");
 		
 	}
 

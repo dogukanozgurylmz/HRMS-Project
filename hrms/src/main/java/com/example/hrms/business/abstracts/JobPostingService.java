@@ -2,6 +2,8 @@ package com.example.hrms.business.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.JobPosting;
@@ -22,7 +24,7 @@ public interface JobPostingService {
 	
 	DataResult<List<JobPostingDto>> findByIsActiveOrderByApplicationDeadline();
 	
-	DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter);
+	DataResult<Page<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter);
 	
 	Result changeStatus(int id);
 	
