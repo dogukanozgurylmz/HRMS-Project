@@ -108,9 +108,9 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<JobPosting> getById(int id) {
+	public DataResult<JobPosting> findById(int id) {
 		
-		return new SuccessDataResult<JobPosting>(this.jobPostingDao.getById(id));
+		return new SuccessDataResult<JobPosting>(this.jobPostingDao.findById(id));
 		
 	}
 

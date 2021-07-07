@@ -36,6 +36,10 @@ public class JobPostingsController {
 	public DataResult<List<JobPosting>> getAll(){
 		return this.jobPostingService.getAll();
 	}
+	@GetMapping("/findbyid")
+	public DataResult<JobPosting> findById(int id){
+		return this.jobPostingService.findById(id);
+	}
 	
 	@GetMapping("/getallByPage")
 	DataResult<List<JobPosting>> getAll(int pageNo, int pageSize){
@@ -72,8 +76,8 @@ public class JobPostingsController {
 		return this.jobPostingService.changeStatus(id);
 	}
 	
-	@GetMapping("/getByJobPostingFilter")
-	public DataResult<Page<JobPosting>> getByFilter(int pageNo, int pageSize, JobPostingFilter jobPostingFilter) {
+	@PostMapping("/getByJobPostingFilter")
+	public DataResult<Page<JobPosting>> getByFilter(@RequestParam int pageNo, @RequestParam int pageSize,@RequestBody JobPostingFilter jobPostingFilter) {
 		return this.jobPostingService.getByFilter(pageNo, pageSize, jobPostingFilter);
 	}
 	

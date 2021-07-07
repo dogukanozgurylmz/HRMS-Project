@@ -34,7 +34,7 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 			+ "From JobPosting j Inner Join j.employerUser e Inner Join j.jobPosition jp where j.isActive=true Order By j.applicationDeadline ASC")
 	List<JobPostingDto> findByIsActiveOrderByApplicationDeadline();
 	
-	JobPosting getById(int id);
+	JobPosting findById(int id);
 	
 	List<JobPosting> findByIsActive(boolean status);
 	

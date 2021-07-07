@@ -16,7 +16,7 @@ public interface JobPostingService {
 	
 	DataResult<List<JobPosting>> getAll(int pageNo, int pageSize);
 	
-	DataResult<JobPosting> getById(int id);
+	DataResult<JobPosting> findById(int id);
 	
 	DataResult<List<JobPosting>> findByIsActive(boolean status);
 	
