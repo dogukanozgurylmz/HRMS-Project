@@ -46,7 +46,6 @@ public class LanguageManager implements LanguageService {
 		this.languageDao.save(language);
 		return new SuccessResult("Güncellendi");
 		
-		
 	}
 
 	@Override

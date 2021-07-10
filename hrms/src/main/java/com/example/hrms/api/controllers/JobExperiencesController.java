@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +57,16 @@ public class JobExperiencesController {
 	@PostMapping(value = "/add")
 	public ResponseEntity<?> add(@Valid @RequestBody JobExperience jobExperience) {
 		return ResponseEntity.ok(this.jobExperienceService.add(jobExperience));
+	}
+	
+	@PostMapping(value = "/update")
+	public ResponseEntity<?> update(@Valid @RequestBody JobExperience jobExperience) {
+		return ResponseEntity.ok(this.jobExperienceService.update(jobExperience));
+	}
+	
+	@PostMapping(value = "/delete")
+	public ResponseEntity<?> delete(@RequestParam int id) {
+		return ResponseEntity.ok(this.jobExperienceService.delete(id));
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
